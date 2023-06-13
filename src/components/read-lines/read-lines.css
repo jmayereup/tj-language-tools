@@ -1,0 +1,29 @@
+:host {
+    font-family: sans-serif;
+    border: 2px solid var(--color-theme, black);
+    margin: 2rem;
+    padding: 1rem;
+    display: block;
+    width: 20rem;
+    max-width: 100%;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+ span li {
+    margin: 0.25rem 0;
+    padding: 0.25rem;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    list-style: none;
+  }
+  
+  li:hover,
+  li:active {
+    background: var(--color-theme, black);
+    color: var(--color-theme-inverse, white);
+  } 

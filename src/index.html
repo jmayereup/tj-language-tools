@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+    <title>Stencil Component Starter</title>
+
+    <script type="module" src="/build/tj-language-tools.esm.js"></script>
+    <script nomodule src="/build/tj-language-tools.js"></script>
+    <style>
+      html {
+        --color-theme: green;
+        --color-theme-inverse: purple;
+        --color-theme-highlight: red;
+      }
+    </style>
+
+  </head>
+  <body>
+    <my-component first="Stencil" last="'Don't call me a framework' JS"></my-component>
+    <br>
+    <tj-read-lines>this is a test. It should parse the line. Did it work? Yes?
+      This is a line 
+      break
+      This is a not. Is not.
+    </tj-read-lines>
+  </body>
+</html>
+
+
+
