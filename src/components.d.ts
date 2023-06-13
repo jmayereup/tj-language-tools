@@ -10,6 +10,9 @@ export namespace Components {
         "setLang": string;
         "sourceID": string;
     }
+    interface TjSpeak {
+        "setLang": string;
+    }
 }
 declare global {
     interface HTMLTjReadLinesElement extends Components.TjReadLines, HTMLStencilElement {
@@ -18,8 +21,15 @@ declare global {
         prototype: HTMLTjReadLinesElement;
         new (): HTMLTjReadLinesElement;
     };
+    interface HTMLTjSpeakElement extends Components.TjSpeak, HTMLStencilElement {
+    }
+    var HTMLTjSpeakElement: {
+        prototype: HTMLTjSpeakElement;
+        new (): HTMLTjSpeakElement;
+    };
     interface HTMLElementTagNameMap {
         "tj-read-lines": HTMLTjReadLinesElement;
+        "tj-speak": HTMLTjSpeakElement;
     }
 }
 declare namespace LocalJSX {
@@ -27,8 +37,12 @@ declare namespace LocalJSX {
         "setLang"?: string;
         "sourceID"?: string;
     }
+    interface TjSpeak {
+        "setLang"?: string;
+    }
     interface IntrinsicElements {
         "tj-read-lines": TjReadLines;
+        "tj-speak": TjSpeak;
     }
 }
 export { LocalJSX as JSX };
@@ -36,6 +50,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "tj-read-lines": LocalJSX.TjReadLines & JSXBase.HTMLAttributes<HTMLTjReadLinesElement>;
+            "tj-speak": LocalJSX.TjSpeak & JSXBase.HTMLAttributes<HTMLTjSpeakElement>;
         }
     }
 }

@@ -39,8 +39,12 @@ prepareLines(text) {
 };
 
 render() {
-    return <ul>{this.lines.map(line => (<span><li>{line}</li><li class="translate">{line}</li></span>))}
-    </ul>;
+    return this.lines.map(line => (
+    <ul>
+    <li>{line}</li>
+    <li class="translate"><tj-speak>{line}</tj-speak></li>
+    </ul>
+    ));
 }
 
 

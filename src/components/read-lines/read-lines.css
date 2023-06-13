@@ -14,16 +14,18 @@
     list-style: none;
   }
   
- span li {
-    margin: 0.25rem 0;
-    padding: 0.25rem;
+ li {
+    margin: 0;
+    padding: 0.4rem;
     border: 1px solid #ccc;
     cursor: pointer;
     list-style: none;
   }
-  
+
+
   li:hover,
   li:active {
     background: var(--color-theme, black);
     color: var(--color-theme-inverse, white);
   } 
+
