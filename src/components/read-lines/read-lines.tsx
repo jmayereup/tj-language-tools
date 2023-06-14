@@ -1,4 +1,4 @@
-import { Component, Element, Prop, State, h } from '@stencil/core';
+import { Component, Element, Prop, State, h, Listen } from '@stencil/core';
 
 @Component({
     tag: 'tj-read-lines',
@@ -10,11 +10,12 @@ export class ReadingTool {
 
 @Element() el: HTMLElement;
 
-@Prop() setLang: string = 'en-CA';
+@Prop() originalLanguage: string = 'en-CA';
 @Prop() sourceID: string =  '';
 
 @State() isPlaying = false;
 @State() lines: string[] = [];
+@State() speechLang: string = 'en-US';
 
 componentWillLoad() {
     const sourceText = this.el.textContent;
@@ -27,7 +28,6 @@ componentDidLoad() {
     const shadowRoot = this.el.shadowRoot;
     console.log('Component did load');
     const translateItems = shadowRoot.querySelectorAll(".translate");
-    console.log(translateItems);
     translateItems.forEach(item => item.setAttribute('translate', 'yes'));
 }
 
@@ -38,11 +38,20 @@ prepareLines(text) {
     return this.lines = content.split('\n');
 };
 
+@Listen('languageChanged', { target: 'body' })
+onLanguageChanged(event: CustomEvent) {
+    console.log("from read-lines", event);
+    this.speechLang = event.detail;
+    const shadowRoot = this.el.shadowRoot;
+    const translateItems = shadowRoot.querySelectorAll(".translate");
+    translateItems.forEach(item => item.setAttribute('speech-lang', `${this.speechLang}`))
+}
+
 render() {
     return this.lines.map(line => (
     <ul>
-    <li>{line}</li>
-    <li class="translate"><tj-speak>{line}</tj-speak></li>
+    <li><tj-speak>{line}</tj-speak></li>
+    <li><tj-speak class="translate">{line}</tj-speak></li>
     </ul>
     ));
 }

@@ -7,12 +7,18 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface TjReadLines {
-        "setLang": string;
+        "originalLanguage": string;
         "sourceID": string;
     }
-    interface TjSpeak {
-        "setLang": string;
+    interface TjSetTranslationLanguage {
     }
+    interface TjSpeak {
+        "speechLang": string;
+    }
+}
+export interface TjSetTranslationLanguageCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLTjSetTranslationLanguageElement;
 }
 declare global {
     interface HTMLTjReadLinesElement extends Components.TjReadLines, HTMLStencilElement {
@@ -20,6 +26,12 @@ declare global {
     var HTMLTjReadLinesElement: {
         prototype: HTMLTjReadLinesElement;
         new (): HTMLTjReadLinesElement;
+    };
+    interface HTMLTjSetTranslationLanguageElement extends Components.TjSetTranslationLanguage, HTMLStencilElement {
+    }
+    var HTMLTjSetTranslationLanguageElement: {
+        prototype: HTMLTjSetTranslationLanguageElement;
+        new (): HTMLTjSetTranslationLanguageElement;
     };
     interface HTMLTjSpeakElement extends Components.TjSpeak, HTMLStencilElement {
     }
@@ -29,19 +41,24 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "tj-read-lines": HTMLTjReadLinesElement;
+        "tj-set-translation-language": HTMLTjSetTranslationLanguageElement;
         "tj-speak": HTMLTjSpeakElement;
     }
 }
 declare namespace LocalJSX {
     interface TjReadLines {
-        "setLang"?: string;
+        "originalLanguage"?: string;
         "sourceID"?: string;
     }
+    interface TjSetTranslationLanguage {
+        "onLanguageChanged"?: (event: TjSetTranslationLanguageCustomEvent<string>) => void;
+    }
     interface TjSpeak {
-        "setLang"?: string;
+        "speechLang"?: string;
     }
     interface IntrinsicElements {
         "tj-read-lines": TjReadLines;
+        "tj-set-translation-language": TjSetTranslationLanguage;
         "tj-speak": TjSpeak;
     }
 }
@@ -50,6 +67,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "tj-read-lines": LocalJSX.TjReadLines & JSXBase.HTMLAttributes<HTMLTjReadLinesElement>;
+            "tj-set-translation-language": LocalJSX.TjSetTranslationLanguage & JSXBase.HTMLAttributes<HTMLTjSetTranslationLanguageElement>;
             "tj-speak": LocalJSX.TjSpeak & JSXBase.HTMLAttributes<HTMLTjSpeakElement>;
         }
     }

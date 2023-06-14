@@ -7,7 +7,7 @@ import { Component, Element, Prop, State, h } from '@stencil/core';
 })
 export class Speak {
 
-@Prop() setLang: string = 'en-CA';
+@Prop({ mutable: true, reflect: true}) speechLang: string = document.documentElement.lang;
 
 @State() isPlaying: boolean = false;
 
@@ -18,12 +18,19 @@ utterance = new SpeechSynthesisUtterance;
 
 readText(text: string) {
     this.utterance.text = text;
-    this.utterance.lang = this.setLang;
+    this.utterance.lang = this.speechLang;
     this.utterance.rate = .8;
     this.utterance.onend = () => {
       this.isPlaying = false; };
     window.speechSynthesis.speak(this.utterance);
 }
+
+// @Watch('translationLanguage')
+// onTranslationLanguageChanged(newValue: string, oldValue: string) {
+//     if (newValue !== oldValue) {
+//         this.utterance
+//     }
+// }
 
 componentWillLoad() {
     console.log('Component is about to be rendered');
@@ -39,8 +46,8 @@ componentWillLoad() {
 
     render() {
         return (
-            <div>
-                <span onClick={this.readText.bind(this, this.speakLine)}>{this.speakLine}&#127911;</span>
+            <div onClick={this.readText.bind(this, this.speakLine)}>
+                <span>{this.speakLine}&#127911;</span>
             </div>
         );
     }
