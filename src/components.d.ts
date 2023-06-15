@@ -7,7 +7,7 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface TjReadLines {
-        "originalLanguage": string;
+        "setLang": string;
         "sourceID": string;
     }
     interface TjSetTranslationLanguage {
@@ -15,10 +15,16 @@ export namespace Components {
     interface TjSpeak {
         "speechLang": string;
     }
+    interface TjTranslate {
+    }
 }
 export interface TjSetTranslationLanguageCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLTjSetTranslationLanguageElement;
+}
+export interface TjTranslateCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLTjTranslateElement;
 }
 declare global {
     interface HTMLTjReadLinesElement extends Components.TjReadLines, HTMLStencilElement {
@@ -39,27 +45,38 @@ declare global {
         prototype: HTMLTjSpeakElement;
         new (): HTMLTjSpeakElement;
     };
+    interface HTMLTjTranslateElement extends Components.TjTranslate, HTMLStencilElement {
+    }
+    var HTMLTjTranslateElement: {
+        prototype: HTMLTjTranslateElement;
+        new (): HTMLTjTranslateElement;
+    };
     interface HTMLElementTagNameMap {
         "tj-read-lines": HTMLTjReadLinesElement;
         "tj-set-translation-language": HTMLTjSetTranslationLanguageElement;
         "tj-speak": HTMLTjSpeakElement;
+        "tj-translate": HTMLTjTranslateElement;
     }
 }
 declare namespace LocalJSX {
     interface TjReadLines {
-        "originalLanguage"?: string;
+        "setLang"?: string;
         "sourceID"?: string;
     }
     interface TjSetTranslationLanguage {
-        "onLanguageChanged"?: (event: TjSetTranslationLanguageCustomEvent<string>) => void;
+        "onVoiceChanged"?: (event: TjSetTranslationLanguageCustomEvent<string>) => void;
     }
     interface TjSpeak {
         "speechLang"?: string;
+    }
+    interface TjTranslate {
+        "onCheckLanguageEvent"?: (event: TjTranslateCustomEvent<string>) => void;
     }
     interface IntrinsicElements {
         "tj-read-lines": TjReadLines;
         "tj-set-translation-language": TjSetTranslationLanguage;
         "tj-speak": TjSpeak;
+        "tj-translate": TjTranslate;
     }
 }
 export { LocalJSX as JSX };
@@ -69,6 +86,7 @@ declare module "@stencil/core" {
             "tj-read-lines": LocalJSX.TjReadLines & JSXBase.HTMLAttributes<HTMLTjReadLinesElement>;
             "tj-set-translation-language": LocalJSX.TjSetTranslationLanguage & JSXBase.HTMLAttributes<HTMLTjSetTranslationLanguageElement>;
             "tj-speak": LocalJSX.TjSpeak & JSXBase.HTMLAttributes<HTMLTjSpeakElement>;
+            "tj-translate": LocalJSX.TjTranslate & JSXBase.HTMLAttributes<HTMLTjTranslateElement>;
         }
     }
 }

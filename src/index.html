@@ -5,9 +5,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
   <title>Stencil Component Starter</title>
-  <!-- Required for Translation Service -->
-  <script type="text/javascript"
-    src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
   <script type="module" src="/build/tj-language-tools.esm.js"></script>
   <!-- <script nomodule src="/build/tj-language-tools.js"></script> -->
   <style>
@@ -23,14 +21,24 @@
 <body>
   <my-component first="Stencil" last="'Don't call me a framework' JS"></my-component>
   <br>
-  <tj-read-lines>this is a test. It should parse the line. Did it work? Yes?
+  <tj-read-lines set-lang="en-CA">this is a test. It should parse the line. Did it work? Yes?
     This is a line
     break
     This is a not. Is not.
   </tj-read-lines>
-  <tj-speak>Testing 123</tj-speak>
-  <tj-speak set-lang="fr-FR">Bonjour!</tj-speak>
-  <tj-set-translation-language></tj-set-translation-language>
+  <div translate="no">
+    <tj-set-translation-language></tj-set-translation-language>
+    <tj-translate></tj-translate>
+  </div>
+  <!-- In HTML: <div id="google_translate_element">Test</div> -->
 </body>
+<!-- Required for Translation Service: Callback removed, function called in component-->
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js"></script>
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({ pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.VERTICAL }, 'google_translate_element');
+  }
+</script>
+<!-- End Required for Translations -->
 
 </html>

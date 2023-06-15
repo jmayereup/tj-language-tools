@@ -2,24 +2,37 @@ import { Component, State, h, Event, EventEmitter } from '@stencil/core';
 
 @Component({
     tag: 'tj-set-translation-language',
-    styleUrl: 'set-translation-language.css'
+    styleUrl: 'set-translation-language.css',
+    shadow: true,
 })
 export class SetNativeLanguage {
 
-@State() selectedLanguage = "en-CA";
+    @State() selectedLanguage = "en-CA";
 
-@Event({ bubbles: true, composed: true}) languageChanged: EventEmitter<string>;
+    @Event({ bubbles: true, composed: true }) voiceChanged: EventEmitter<string>;
 
-changeLanguage(event) {
-    this.selectedLanguage = event.target.value;
-    this.languageChanged.emit(this.selectedLanguage);
-    console.log("Language Chosen", this.selectedLanguage)
-}
+    changeVoice(event) {
+        this.selectedLanguage = event.target.value;
+        this.voiceChanged.emit(this.selectedLanguage);
+        console.log("Language Chosen", this.selectedLanguage);
+        // translate('I spea Dutch!', { from: 'en', to: 'nl' }).then(res => {
+        //     console.log(res.text);
+        //     //=> Ik spreek Nederlands!
+        //     console.log(res.from.text.autoCorrected);
+        //     //=> true
+        //     console.log(res.from.text.value);
+        //     //=> I [speak] Dutch!
+        //     console.log(res.from.text.didYouMean);
+        //     //=> false
+        // }).catch(err => {
+        //     console.error(err);
+        // });
+    }
 
     render() {
         return (
             <div>
-                <select name="selectedLanguage" onChange={this.changeLanguage.bind(this)}>
+                <select name="selectedLanguage" onChange={this.changeVoice.bind(this)}>
                     <option value="ar-SA">Arabic</option>
                     <option value="zh-CN">Chinese</option>
                     <option value="nl-NL">Dutch</option>
