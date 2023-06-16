@@ -1,9 +1,9 @@
 import { Component, State, h, Event, EventEmitter } from '@stencil/core';
 
 @Component({
-    tag: 'tj-set-translation-language',
-    styleUrl: 'set-translation-language.css',
-    shadow: true,
+    tag: 'tj-set-voice-language',
+    styleUrl: 'set-voice-language.css',
+    shadow: false,
 })
 export class SetNativeLanguage {
 
@@ -14,24 +14,12 @@ export class SetNativeLanguage {
     changeVoice(event) {
         this.selectedLanguage = event.target.value;
         this.voiceChanged.emit(this.selectedLanguage);
-        console.log("Language Chosen", this.selectedLanguage);
-        // translate('I spea Dutch!', { from: 'en', to: 'nl' }).then(res => {
-        //     console.log(res.text);
-        //     //=> Ik spreek Nederlands!
-        //     console.log(res.from.text.autoCorrected);
-        //     //=> true
-        //     console.log(res.from.text.value);
-        //     //=> I [speak] Dutch!
-        //     console.log(res.from.text.didYouMean);
-        //     //=> false
-        // }).catch(err => {
-        //     console.error(err);
-        // });
     }
 
     render() {
         return (
             <div>
+                <label><span class="green">Speech Voice</span></label>
                 <select name="selectedLanguage" onChange={this.changeVoice.bind(this)}>
                     <option value="ar-SA">Arabic</option>
                     <option value="zh-CN">Chinese</option>
@@ -51,7 +39,7 @@ export class SetNativeLanguage {
                     <option value="es-MX">Spanish (Mexico)</option>
                     <option value="th-TH">Thai</option>
                     <option value="uk-UA">Ukrainian</option>
-                </select><label>Speech Voice</label>
+                </select>
             </div >
         );
     }

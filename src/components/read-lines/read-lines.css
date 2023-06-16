@@ -1,11 +1,10 @@
 :host {
     font-family: sans-serif;
     border: 2px solid var(--color-theme, black);
-    margin: 2rem;
+    margin: .5rem;
     padding: 1rem;
     display: block;
-    width: 20rem;
-    max-width: 100%;
+    max-width: 80rem;
   }
 
   ul {
@@ -20,6 +19,11 @@
     border: 1px solid #ccc;
     cursor: pointer;
     list-style: none;
+    background-color: #bdffb4;
+  }
+
+  li.translate {
+    background-color: antiquewhite;
   }
 
 

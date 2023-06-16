@@ -8,17 +8,16 @@ import { Component, Element, Prop, Watch, h } from '@stencil/core';
 })
 export class Speak {
 
-    @Prop({ mutable: true, reflect: true }) speechLang = "en-CA";
+    @Prop({ mutable: true, reflect: true }) speechLang: string | null;
     setLang: string | null;
 
     @Watch('speechLang')
     watchSpeechLangHandler() {
-        this.setLang = this.speechLang;
+        if (this.speechLang) {
+            this.setLang = this.speechLang;
+            console.log('Language Set in Listener', this.setLang);
+        }
     }
-
-
-
-    isPlaying: boolean = false;
 
     @Element() el: HTMLElement;
 
@@ -26,37 +25,31 @@ export class Speak {
     speakLine: string = "";
 
     readText(text: string) {
-        if (!this.setLang) { this.setLang = document.documentElement.lang };
+        window.speechSynthesis.cancel();
+
+        let tempSetLang = false;
+        if (!this.setLang) {
+            this.setLang = document.documentElement.lang;
+            tempSetLang = true;
+        };
+
         this.utterance.text = text;
         this.utterance.lang = this.setLang;
         this.utterance.rate = .8;
-        this.utterance.onend = () => {
-            this.isPlaying = false;
-        };
+        
         window.speechSynthesis.speak(this.utterance);
+        if (tempSetLang) { this.setLang = null };
     }
-
-    // @Watch('translationLanguage')
-    // onTranslationLanguageChanged(newValue: string, oldValue: string) {
-    //     if (newValue !== oldValue) {
-    //         this.utterance
-    //     }
-    // }
 
     componentWillLoad() {
         if ('speechSynthesis' in window) {
             console.log("TTS Suported");
         }
         this.speakLine = this.el.textContent;
+        if (this.speechLang) {
+            this.setLang = this.speechLang;
+        }
     }
-
-    // componentDidUpdate() {
-    //     if ('speechSynthesis' in window) {
-    //         this.speakLine = this.el.textContent;
-    //         this.el.textContent = "";
-    //       } else return;
-    // }
-
 
 
     render() {

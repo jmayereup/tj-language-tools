@@ -4,34 +4,60 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
-  <title>Stencil Component Starter</title>
-
+  <title>TJ Tools</title>
   <script type="module" src="/build/tj-language-tools.esm.js"></script>
   <!-- <script nomodule src="/build/tj-language-tools.js"></script> -->
   <style>
     html {
-      --color-theme: green;
-      --color-theme-inverse: #e5d5eb;
-      --color-theme-highlight: red;
+      --color-theme: darkgreen;
+      --color-theme-inverse: white;
+      --color-theme-highlight: rgb(43, 32, 32);
+    }
+
+    .lang-settings {
+      display:flex;
+      border: 2px solid green;
+      margin: .5rem;
+      padding: .2rem 1rem;
+      text-align: center;
+      max-width: 80rem;
+      justify-content: space-around;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    select {
+      background-color: #bdffb4;
+      display: inline-block;
+      border: 1px solid green;
+      margin-left: .2rem;
+      margin-bottom: .5rem;
+      padding: .2rem;
+    }
+
+    tj-translate-element select {
+      background-color: antiquewhite;
+    }
+
+    #goog-gt-tt,
+    .goog-te-balloon-frame {
+      display: none !important;
+    }
+
+    .goog-text-highlight {
+      background: none !important;
+      box-shadow: none !important;
     }
   </style>
-
 </head>
 
 <body>
-  <my-component first="Stencil" last="'Don't call me a framework' JS"></my-component>
-  <br>
-  <tj-read-lines set-lang="en-CA">this is a test. It should parse the line. Did it work? Yes?
-    This is a line
-    break
-    This is a not. Is not.
-  </tj-read-lines>
-  <div translate="no">
-    <tj-set-translation-language></tj-set-translation-language>
-    <tj-translate></tj-translate>
-  </div>
-  <!-- In HTML: <div id="google_translate_element">Test</div> -->
-</body>
+  <div id="postText" translate="no">Test 123. The Cat and the hat.</div>
+
+  <tj-lang-card data-source="postText"></tj-lang-card>
+
+  </body>
+
 <!-- Required for Translation Service: Callback removed, function called in component-->
 <script type="text/javascript" src="https://translate.google.com/translate_a/element.js"></script>
 <script type="text/javascript">

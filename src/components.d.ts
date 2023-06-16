@@ -6,38 +6,43 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
+    interface TjLangCard {
+        "dataSource": string;
+    }
     interface TjReadLines {
         "setLang": string;
         "sourceID": string;
     }
-    interface TjSetTranslationLanguage {
+    interface TjSetVoiceLanguage {
     }
     interface TjSpeak {
-        "speechLang": string;
+        "speechLang": string | null;
     }
-    interface TjTranslate {
+    interface TjTranslateElement {
     }
 }
-export interface TjSetTranslationLanguageCustomEvent<T> extends CustomEvent<T> {
+export interface TjSetVoiceLanguageCustomEvent<T> extends CustomEvent<T> {
     detail: T;
-    target: HTMLTjSetTranslationLanguageElement;
-}
-export interface TjTranslateCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLTjTranslateElement;
+    target: HTMLTjSetVoiceLanguageElement;
 }
 declare global {
+    interface HTMLTjLangCardElement extends Components.TjLangCard, HTMLStencilElement {
+    }
+    var HTMLTjLangCardElement: {
+        prototype: HTMLTjLangCardElement;
+        new (): HTMLTjLangCardElement;
+    };
     interface HTMLTjReadLinesElement extends Components.TjReadLines, HTMLStencilElement {
     }
     var HTMLTjReadLinesElement: {
         prototype: HTMLTjReadLinesElement;
         new (): HTMLTjReadLinesElement;
     };
-    interface HTMLTjSetTranslationLanguageElement extends Components.TjSetTranslationLanguage, HTMLStencilElement {
+    interface HTMLTjSetVoiceLanguageElement extends Components.TjSetVoiceLanguage, HTMLStencilElement {
     }
-    var HTMLTjSetTranslationLanguageElement: {
-        prototype: HTMLTjSetTranslationLanguageElement;
-        new (): HTMLTjSetTranslationLanguageElement;
+    var HTMLTjSetVoiceLanguageElement: {
+        prototype: HTMLTjSetVoiceLanguageElement;
+        new (): HTMLTjSetVoiceLanguageElement;
     };
     interface HTMLTjSpeakElement extends Components.TjSpeak, HTMLStencilElement {
     }
@@ -45,48 +50,53 @@ declare global {
         prototype: HTMLTjSpeakElement;
         new (): HTMLTjSpeakElement;
     };
-    interface HTMLTjTranslateElement extends Components.TjTranslate, HTMLStencilElement {
+    interface HTMLTjTranslateElementElement extends Components.TjTranslateElement, HTMLStencilElement {
     }
-    var HTMLTjTranslateElement: {
-        prototype: HTMLTjTranslateElement;
-        new (): HTMLTjTranslateElement;
+    var HTMLTjTranslateElementElement: {
+        prototype: HTMLTjTranslateElementElement;
+        new (): HTMLTjTranslateElementElement;
     };
     interface HTMLElementTagNameMap {
+        "tj-lang-card": HTMLTjLangCardElement;
         "tj-read-lines": HTMLTjReadLinesElement;
-        "tj-set-translation-language": HTMLTjSetTranslationLanguageElement;
+        "tj-set-voice-language": HTMLTjSetVoiceLanguageElement;
         "tj-speak": HTMLTjSpeakElement;
-        "tj-translate": HTMLTjTranslateElement;
+        "tj-translate-element": HTMLTjTranslateElementElement;
     }
 }
 declare namespace LocalJSX {
+    interface TjLangCard {
+        "dataSource"?: string;
+    }
     interface TjReadLines {
         "setLang"?: string;
         "sourceID"?: string;
     }
-    interface TjSetTranslationLanguage {
-        "onVoiceChanged"?: (event: TjSetTranslationLanguageCustomEvent<string>) => void;
+    interface TjSetVoiceLanguage {
+        "onVoiceChanged"?: (event: TjSetVoiceLanguageCustomEvent<string>) => void;
     }
     interface TjSpeak {
-        "speechLang"?: string;
+        "speechLang"?: string | null;
     }
-    interface TjTranslate {
-        "onCheckLanguageEvent"?: (event: TjTranslateCustomEvent<string>) => void;
+    interface TjTranslateElement {
     }
     interface IntrinsicElements {
+        "tj-lang-card": TjLangCard;
         "tj-read-lines": TjReadLines;
-        "tj-set-translation-language": TjSetTranslationLanguage;
+        "tj-set-voice-language": TjSetVoiceLanguage;
         "tj-speak": TjSpeak;
-        "tj-translate": TjTranslate;
+        "tj-translate-element": TjTranslateElement;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "tj-lang-card": LocalJSX.TjLangCard & JSXBase.HTMLAttributes<HTMLTjLangCardElement>;
             "tj-read-lines": LocalJSX.TjReadLines & JSXBase.HTMLAttributes<HTMLTjReadLinesElement>;
-            "tj-set-translation-language": LocalJSX.TjSetTranslationLanguage & JSXBase.HTMLAttributes<HTMLTjSetTranslationLanguageElement>;
+            "tj-set-voice-language": LocalJSX.TjSetVoiceLanguage & JSXBase.HTMLAttributes<HTMLTjSetVoiceLanguageElement>;
             "tj-speak": LocalJSX.TjSpeak & JSXBase.HTMLAttributes<HTMLTjSpeakElement>;
-            "tj-translate": LocalJSX.TjTranslate & JSXBase.HTMLAttributes<HTMLTjTranslateElement>;
+            "tj-translate-element": LocalJSX.TjTranslateElement & JSXBase.HTMLAttributes<HTMLTjTranslateElementElement>;
         }
     }
 }
